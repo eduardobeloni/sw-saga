@@ -1,6 +1,7 @@
 package com.example.swsaga.usecase.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,15 @@ public class SwSagaUseCaseImpl implements SwSagaUseCase {
         return films.stream()
                 .filter(film -> film.getEpisode() == episode)
                 .findFirst()
-                .orElse(null);
+                .orElseGet(() -> {
+                    System.out.println("Film episode not found");
+                    return null;
+                });
+    }
+
+    @Override
+    public void updateFilm(int episode, String description) {
+        Optional.ofNullable(this.filmDetails(episode))
+            .ifPresent(film -> film.setDescription(description));
     }
 }
