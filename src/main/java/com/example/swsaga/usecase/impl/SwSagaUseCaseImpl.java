@@ -49,6 +49,9 @@ public class SwSagaUseCaseImpl implements SwSagaUseCase {
     @Override
     public void updateFilm(int episode, String description) {
         Optional.ofNullable(this.filmDetails(episode))
-            .ifPresent(film -> film.setDescription(description));
+            .ifPresent(film -> {
+                film.setDescription(description);
+                film.setVersion(film.getVersion() + 1);
+            });
     }
 }

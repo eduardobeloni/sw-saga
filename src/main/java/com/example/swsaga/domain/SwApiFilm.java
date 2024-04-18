@@ -20,5 +20,7 @@ public class SwApiFilm {
     private String description;
 
     private String title;
+
+    @Setter
     private int version = 1;
 }
