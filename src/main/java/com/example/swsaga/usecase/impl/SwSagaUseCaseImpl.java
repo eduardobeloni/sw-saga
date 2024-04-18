@@ -28,19 +28,15 @@ public class SwSagaUseCaseImpl implements SwSagaUseCase {
     }
 
     @Override
-    public SwApiFilm filmDetails(int episode) {
+    public Optional<SwApiFilm> filmDetails(int episode) {
         return films.stream()
                 .filter(film -> film.getEpisode() == episode)
-                .findFirst()
-                .orElseGet(() -> {
-                    System.out.println("Film episode not found");
-                    return null;
-                });
+                .findFirst();
     }
 
     @Override
     public void updateFilm(int episode, String description) {
-        Optional.ofNullable(this.filmDetails(episode))
+        this.filmDetails(episode)
             .ifPresent(film -> {
                 film.setDescription(description);
                 film.setVersion(film.getVersion() + 1);

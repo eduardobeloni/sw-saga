@@ -2,6 +2,8 @@ package com.example.swsaga.resource;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +27,15 @@ public class SwSagaController {
     }
 
     @GetMapping("/films/detail/{episode}")
-    public SwApiFilm detailFilm(@PathVariable int episode) {
-        return useCase.filmDetails(episode);
+    public ResponseEntity<SwApiFilm> detailFilm(@PathVariable int episode) {
+        return useCase.filmDetails(episode)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PatchMapping("/films/update/{episode}")
-    public SwApiFilm updateFilm(@PathVariable int episode, @RequestBody String description) {
+    public ResponseEntity<SwApiFilm> updateFilm(@PathVariable int episode, @RequestBody String description) {
         useCase.updateFilm(episode, description);
-        return useCase.filmDetails(episode);
+        return this.detailFilm(episode);
     }
 }
