@@ -19,11 +19,6 @@ public class SwSagaController {
 
     private final SwSagaUseCase useCase;
 
-    @GetMapping("/films")
-    public String films() {
-        return useCase.retrieveFilmList();
-    }
-
     @GetMapping("/films/list")
     public List<SwApiFilm> listFilms() {
         return useCase.listFilms();

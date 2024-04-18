@@ -25,12 +25,6 @@ public class SwSagaUseCaseImpl implements SwSagaUseCase {
     }
 
     @Override
-    public String retrieveFilmList() {
-        return utils.loadFileSafe("films.json")
-                .orElse("Ooops... Something went wrong :(");
-    }
-
-    @Override
     public List<SwApiFilm> listFilms() {
         return films;
     }
