@@ -6,13 +6,11 @@ import java.nio.file.Files;
 import java.util.Optional;
 
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Service
 public class DataUtils {
 
     private static final ObjectMapper objectMapper = new ObjectMapper()
