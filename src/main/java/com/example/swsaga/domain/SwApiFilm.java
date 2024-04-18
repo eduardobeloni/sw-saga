@@ -15,11 +15,18 @@ public class SwApiFilm {
     @JsonProperty("episode_id")
     private int episode;
 
+    private String title;
+
     @Setter
     @JsonProperty("opening_crawl")
     private String description;
 
-    private String title;
+    private String  director;
+
+    private String producer;
+
+    @JsonProperty("release_date")
+    private String releaseDate;
 
     @Setter
     private int version = 1;
