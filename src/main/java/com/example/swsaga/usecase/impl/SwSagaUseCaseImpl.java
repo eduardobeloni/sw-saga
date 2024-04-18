@@ -13,15 +13,13 @@ import com.example.swsaga.utils.DataUtils;
 @Service
 public class SwSagaUseCaseImpl implements SwSagaUseCase {
 
-    private final DataUtils utils;
-    private List<SwApiFilm> films;
+    private final List<SwApiFilm> films;
 
-    public SwSagaUseCaseImpl(DataUtils utils) {
-        this.utils = utils;
-        final String filmsJson = utils.loadFileSafe("films.json").orElse("");
-        this.films = utils.toObjectSafe(filmsJson, SwApiResponse.class)
+    public SwSagaUseCaseImpl() {
+        final String filmsJson = DataUtils.loadFileSafe("films.json").orElseThrow();
+        this.films = DataUtils.toObjectSafe(filmsJson, SwApiResponse.class)
                 .map(SwApiResponse::getResults)
-                .orElse(List.of());
+                .orElseThrow();
     }
 
     @Override
