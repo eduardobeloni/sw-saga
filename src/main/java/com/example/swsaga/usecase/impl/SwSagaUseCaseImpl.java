@@ -33,4 +33,12 @@ public class SwSagaUseCaseImpl implements SwSagaUseCase {
     public List<SwApiFilm> listFilms() {
         return films;
     }
+
+    @Override
+    public SwApiFilm filmDetails(int episode) {
+        return films.stream()
+                .filter(film -> film.getEpisode() == episode)
+                .findFirst()
+                .orElse(null);
+    }
 }

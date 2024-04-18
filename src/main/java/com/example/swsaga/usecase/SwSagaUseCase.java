@@ -8,4 +8,5 @@ public interface SwSagaUseCase {
 
     String retrieveFilmList();
     List<SwApiFilm> listFilms();
+    SwApiFilm filmDetails(int episode);
 }
