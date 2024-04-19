@@ -6,20 +6,16 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.swsaga.domain.SwApiFilm;
-import com.example.swsaga.domain.SwApiResponse;
+import com.example.swsaga.external.client.SwApiClient;
 import com.example.swsaga.usecase.SwSagaUseCase;
-import com.example.swsaga.utils.DataUtils;
 
 @Service
 public class SwSagaUseCaseImpl implements SwSagaUseCase {
 
     private final List<SwApiFilm> films;
 
-    public SwSagaUseCaseImpl() {
-        final String filmsJson = DataUtils.loadFileSafe("films.json").orElseThrow();
-        this.films = DataUtils.toObjectSafe(filmsJson, SwApiResponse.class)
-                .map(SwApiResponse::getResults)
-                .orElseThrow();
+    public SwSagaUseCaseImpl(SwApiClient client) {
+        this.films = client.getFilms().getResults();
     }
 
     @Override
