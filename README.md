@@ -1,12 +1,3 @@
-# Install provided certificate
-
-## Go to your java base
-- $ cd /usr/lib/jvm/java-17-openjdk-amd64/lib/security/
-
-## Run keytool
-- $ sudo keytool -keystore cacerts -storepass changeit -noprompt -trustcacerts -importcert -alias
-swapi -file sw-saga/swapi.dev.crt
-
 # Start the application in background
 - $ mvn spring-boot:run &
 
